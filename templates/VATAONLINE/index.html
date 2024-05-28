@@ -1,0 +1,90 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VATA - онлайн кинотеатр</title>
+    <link rel="stylesheet" href="{% static "static/css/styles.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        .banner {
+            position: relative;
+        }
+        .banner .bg {
+            width: 100%;
+            height: auto;
+        }
+        .banner .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+        .banner .content h2 {
+            font-size: 2.5em;
+        }
+        .banner .content h4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .banner .content p {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .banner .content .buttons a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .banner .content .video-player {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="" class="logo"><img decoding="async" src="{% static 'static/img/logo.png' %}"></a>
+        <ul class="navigation">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'new' %}">Новинки</a></li>
+            <li><a href="{% url 'films' %}">Каталог</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+        </ul>
+        <div class="search">
+            <form method="get" action="{% url 'films' %}">
+                <input type="text" name="query" placeholder="поиск по названию" value="{{ request.GET.query }}">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+    </header>
+
+    <div class="banner">
+        <img decoding="async" src={% static 'static/img/bg5.jpg' %} class="bg">
+        <div class="content">
+            <h2>присоединяйся к <span style="color:red">сво</span>им</h2>
+            <h4>
+                <span><i>16+</i></span>
+                <span>Новые возможности</span>
+                <span>При поддержки армии РФ</span>
+            </h4>
+            <p>Военнослужащие по контракту, находящиеся в зоне СВО, получают денежное довольствие в соответствии со своим воинским званием и должностью. Например, минимальное денежное довольствие рядового составляет 195 тыс. рублей, командира взвода – 225 тыс., командира батальона – 243 тыс. рублей в месяц.</p>
+            <div class="video-player">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/rA2IZ2r4A5c?si=EJwvJICCvovv-7GP" frameborder="0" allowfullscreen auti></iframe>
+            </div>
+             <div class="buttons">
+                <a href="https://www.gosuslugi.ru/600483/1/form"><i class="fa fa-play" aria-hidden="true"></i> Подписать контракт</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

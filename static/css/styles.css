@@ -1,0 +1,651 @@
+@import url('http://fonts.gstatic.com/css?family=Poppins:200,300,400,600,700,800,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #000;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 100px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.94);
+    color: #fff; /* Цвет текста в хедере (белый) */
+}
+
+header .logo img {
+    max-width: 150px;
+}
+
+header .logo:hover img {
+    transform: rotate(360deg);
+    transition: 5s;
+}
+
+.navigation {
+    display: flex;
+    margin: auto;
+}
+
+.navigation li {
+    list-style: none;
+    margin: 0 10px;
+}
+
+.navigation li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bolder;
+    letter-spacing: 1px;
+}
+
+.navigation li:hover a {
+    color: #de0611;
+}
+
+.search {
+    position: relative;
+    width: 300px;
+    height: 40px;
+}
+
+.search input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: transparent;
+    border: 2px solid rgb(255, 51, 51);
+    outline: none;
+    border-radius: 14px;
+    padding: 0 10px 0 45px;
+    backdrop-filter: blur(10px);
+}
+
+.search .fa-search {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    padding-right: 10px;
+    color: #fff;
+    border-right: 1px solid #fff;
+}
+
+.search input::placeholder {
+    color: #fff;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.banner .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.5); /* Цветовой фильтр для затемнения */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    max-width: 550px;
+
+}
+
+.content h2 {
+    color: #fff;
+    font-size: 3em;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.banner .content h4 {
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+}
+
+.banner .content h4 span {
+    padding: 0 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.banner .content h4 span:first-child {
+    padding-left: 0;
+}
+
+.banner .content h4 span:last-child {
+    padding-right: none;
+}
+
+.banner .content h4 span i {
+    background: #de0611;
+    color: #fff;
+    padding: 0 8px;
+    display: inline-block;
+    font-size: normal;
+    border-radius: 2px;
+}
+
+.banner .content p {
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 1.5em;
+    color: rgb(255, 255, 255);
+    margin: 5px 0 20px;
+    font-weight: bolder;
+}
+
+.banner .content .buttons {
+    position: relative;
+}
+
+.banner .content .buttons a {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    background: #de0611;
+    color: #fff;
+    padding: 9px 10px;
+    text-decoration: none;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+    border: 0.1rem solid rgba(0, 0, 0, 0.7);
+}
+
+.banner .content .buttons a:nth-child(2) {
+    background: #000;
+}
+
+.banner .content .buttons a:hover:nth-child(2) {
+    background: #de0611;
+}
+
+.play {
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.play img {
+    margin-right: 10px;
+    max-width: 50px;
+}
+
+.trailer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.trailer.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.trailer video {
+    max-width: 900px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+    border: 0.1rem solid rgb(255, 255, 255);
+}
+
+.close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    filter: invert(1);
+    max-width: 32px;
+}
+
+@media (max-width: 991px) {
+    header {
+        padding: 20px 50px;
+        flex-direction: column;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 10px 0;
+    }
+
+    .content h2 {
+        margin-top: 55px;
+    }
+
+    .banner {
+        padding: 100px 50px;
+    }
+
+    .banner .play {
+        left: 50px;
+        font-size: 1em;
+    }
+
+    .play img {
+        margin-right: 10px;
+        max-width: 40px;
+    }
+
+    .trailer video {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+    }
+
+    .search {
+        position: relative;
+        width: calc(100% - 20px);
+        height: 40px;
+    }
+
+    .banner .play {
+        bottom: 30px;
+    }
+}
+
+footer {
+    background-color: #333; /* Цвет фона футера */
+    color: #fff; /* Цвет текста в футере */
+    padding: 20px 0;
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+
+.container p {
+    margin: 0; /* Убираем отступы вокруг абзаца */
+}
+
+
+.movie {
+    flex: 0 0 auto;
+    text-align: center;
+    background-color: #444;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: -10px; /* Уменьшаем расстояние между карточками */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid transparent; /* устанавливаем толщину и цвет рамки */
+    width: 200px; /* фиксированная ширина элемента */
+    height: 300px; /* фиксированная высота элемента */
+    box-sizing: border-box; /* учитываем рамку в расчёте размеров элемента */
+}
+
+.movie img {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+.movie p {
+    color: #fff;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+
+/* Добавленные стили для контейнера фильмов */
+.container {
+    margin: 0 auto;
+    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); /* Автоматически подстраиваем колонки */
+    grid-gap: 20px; /* Расстояние между карточками */
+    padding: 20px;
+}
+
+.main {
+    padding-top: 80px; /* Задаем отступ сверху, равный высоте header */
+}
+
+.catalog {
+    padding-top: 100px; /* Задаем отступ сверху, равный высоте header */
+}
+
+
+.watchlist {
+    padding-top: 80px;
+}
+
+.watchlist h2 {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+table td img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.watchlist button {
+    background-color: #de0611;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.watchlist button:hover {
+    background-color: #fff;
+    color: #de0611;
+}
+
+body {
+    background-color: #000;
+    color: #fff; /* Цвет текста */
+}
+
+/* Стили для заголовков */
+h2, h3 {
+    color: #fff; /* Цвет заголовков */
+}
+
+/* Стили для текста */
+p {
+    color: #fff; /* Цвет обычного текста */
+}
+
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.movie-details {
+    display: flex;
+    width: 1000px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.poster img {
+    width: 200px;
+    height: auto;
+}
+
+.info {
+    padding: 20px;
+}
+
+.player {
+    margin-top: 20px;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+/* Стилизация видеоплеера */
+.player video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Контейнер для видеоплеера */
+.player {
+    position: relative;
+}
+
+/* Стилизация кнопок управления */
+.player .controls {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player .controls button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* Стилизация полосы времени */
+.player .time-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.player .time-bar .progress {
+    height: 100%;
+    background-color: #de0611; /* Цвет прогресса */
+}
+
+/* Стилизация ползунка громкости */
+.player input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+
+.player input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form h3 {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+#commentInput {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#commentInput:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.button_click {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #000000;
+}
+
+.comments {
+    margin-top: 20px;
+    border: 2px solid #bbbbbb; /* Добавляем рамку */
+    border-radius: 8px; /* Закругляем углы */
+    padding: 20px;
+    background-color: #ffffff; /* Цвет фона */
+}
+
+.comments2 {
+    margin-top: 20px;
+    border: 2px solid #bbbbbb; /* Добавляем рамку */
+    border-radius: 8px; /* Закругляем углы */
+    padding: 10px;
+    background-color: #ffffff; /* Цвет фона */
+}
+
+
+.comments h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+.comments2 h4 {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+#commentList {
+    list-style: none;
+    padding: 0;
+}
+
+#commentList li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    border-bottom: 1px solid #ccc; /* Горизонтальная линия между комментариями */
+    padding-bottom: 5px; /* Добавляем небольшой отступ между комментариями */
+    color: #555; /* Цвет текста комментариев */
+}
+
+#commentList li:last-child {
+    border-bottom: none; /* Убираем горизонтальную линию у последнего комментария */
+}
+
+.filter-container {
+    margin-top: 100px;
+    float: right;
+    margin-left: 20px;
+    border: 1px solid #ccc; /* Добавляем обводку */
+    border-radius: 5px; /* Закругляем углы */
+    padding: 20px; /* Добавляем внутренний отступ для контента */
+}
+
+
+.genre-filter {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.apply-button {
+    background-color: #de0611;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+    background-color: #000;
+}
+
+.filter-section {
+    margin-bottom: 10px;
+}

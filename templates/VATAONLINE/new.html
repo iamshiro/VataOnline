@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VATA - онлайн кинотеатр</title>
+    <link rel="stylesheet" href="{% static 'static/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="" class="logo"><img decoding="async" src="{% static 'static/img/logo.png' %}"></a>
+        <ul class="navigation">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'new' %}">Новинки</a></li>
+            <li><a href="{% url 'films' %}">Каталог</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+        </ul>
+        <div class="search">
+            <form method="get" action="{% url 'films' %}">
+                <input type="text" name="query" placeholder="поиск по названию" value="{{ request.GET.query }}">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+    </header>
+
+        <div class="search">
+        </div>
+
+    <main class="container catalog">
+    {% for film in films %}
+         
+        <div class="movie">
+        <a href="{{ film.id }}">
+            <img src="{{ film.poster.url }}"  alt="Постер фильма">
+            <h3>{{ film.title }}</h3>
+                 </a>
+        </div>
+
+        {% endfor %}
+    </main>
+
+
+</body>
+</html>

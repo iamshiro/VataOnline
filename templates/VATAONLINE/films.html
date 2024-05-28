@@ -1,0 +1,75 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VATA - онлайн кинотеатр</title>
+    <link rel="stylesheet" href="{% static 'static/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="" class="logo"><img decoding="async" src="{% static 'static/img/logo.png' %}"></a>
+        <ul class="navigation">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'new' %}">Новинки</a></li>
+            <li><a href="{% url 'films' %}">Каталог</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+        </ul>
+        <div class="search">
+            <form method="get" action="{% url 'films' %}">
+                <input type="text" name="query" placeholder="поиск по названию" value="{{ request.GET.query }}">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+    </header>
+
+    <div class="filter-container">
+        <form method="get" class="filters">
+            <div class="filter-section">
+                <h4>Жанры</h4>
+                {% for genre in genres %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="genre" value="{{ genre.id }}" {% if genre.id in selected_genres %}checked{% endif %}>
+                        {{ genre.name }}
+                    </label><br>
+                {% endfor %}
+            </div>
+            <div class="filter-section">
+                <h4>Типы</h4>
+                {% for type in types %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="type" value="{{ type.id }}" {% if type.id in selected_types %}checked{% endif %}>
+                        {{ type.name }}
+                    </label><br>
+                {% endfor %}
+            </div>
+            <div class="filter-section">
+                <h4>Годы</h4>
+                {% for year in years %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="year" value="{{ year }}" {% if year in selected_years %}checked{% endif %}>
+                        {{ year }}
+                    </label><br>
+                {% endfor %}
+            </div>
+        <br>
+        <br>
+            <button type="submit" class="apply-button">Применить фильтр</button>
+        </form>
+    </div>
+
+    <main class="container catalog">
+        {% for film in films %}
+            <div class="movie">
+                <a href="{{ film.id }}">
+                    <img src="{{ film.poster.url }}"  alt="Постер фильма">
+                </a>
+
+            </div>
+        {% endfor %}
+    </main>
+
+</body>
+</html>

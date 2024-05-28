@@ -1,0 +1,36 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VATA - онлайн кинотеатр</title>
+    <link rel="stylesheet" href="{% static 'static/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="" class="logo"><img decoding="async" src="{% static 'static/img/logo.png' %}"></a>
+        <ul class="navigation">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'new' %}">Новинки</a></li>
+            <li><a href="{% url 'films' %}">Каталог</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+        </ul>
+        <div class="search">
+            <form method="get" action="{% url 'films' %}">
+                <input type="text" name="query" placeholder="поиск по названию" value="{{ request.GET.query }}">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+    </header>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <main style="text-align: center"  class=" catalog">
+        <h1> По всем интересующим Вас вопросам Вы можете писать нам на E-mail: </h1>
+        <h1 style="color:red" >admin@vata.online</h1>
+
+    </main>
+
+</body>
+</html>

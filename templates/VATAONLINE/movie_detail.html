@@ -1,0 +1,66 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ films.title }}</title>
+    <link rel="stylesheet" href="{% static 'static/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <a href="" class="logo"><img decoding="async" src="{% static 'static/img/logo.png' %}"></a>
+    <ul class="navigation">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'new' %}">Новинки</a></li>
+            <li><a href="{% url 'films' %}">Каталог</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+    </ul>
+        <div class="search">
+            <form method="get" action="{% url 'films' %}">
+                <input type="text" name="query" placeholder="поиск по названию" value="{{ request.GET.query }}">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+</header>
+
+<main class="container catalog">
+    <div class="movie-details">
+        <div class="poster">
+            <img src="{{ film.poster.url }}" alt="Movie Poster">
+        </div>
+        <div class="info">
+            <h1>{{ film.title }}</h1>
+            <p><b>Год: </b>{{ film.year }}</p>
+            <p><b>Жанры:</b>{% for genre in film.genres.all %}
+                {{ genre.name }}{% if not forloop.last %},{% endif %}{% endfor %}</p>
+            <p><b>Описание:</b> {{ film.description }}.</p>
+            <div class="player">
+                    <iframe width="560" height="315" src="{{ film.url }}" frameborder="1" allowfullscreen></iframe>
+            </div>
+            <div class="comment-form">
+                <h2>Оставить комментарий</h2>
+                <form action="{% url 'addcomments' pk=film.pk %}" method="post" id="commentForm">
+                    {% csrf_token %}
+                    <input class="comments2" maxlength="20" name="name" placeholder="Ваше имя"> <br>
+                    <textarea class="comments2"  name="text_comments" placeholder="Введите ваш комментарий"></textarea> <br>
+                    <button class="button_click" type="submit">Отправить</button>
+                </form>
+            </div>
+            <div class="comments">
+                <h3>Комментарии</h3>
+                <ul id="commentList">
+ {% for comment in comments %}
+            <li>{{ comment.name }}: {{ comment.text_comments }}</li>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+                </ul>
+
+            </div>
+
+</main>
+
+</body>
+</html>
