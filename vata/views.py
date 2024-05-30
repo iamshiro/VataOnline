@@ -24,20 +24,20 @@ class FilmList(View):
         years = Movie.objects.values_list('year', flat=True).distinct()
         query = request.GET.get('query')
 
-        genre_id = request.GET.get('genre')
-        type_id = request.GET.get('type')
-        year = request.GET.get('year')
+        genre_ids = request.GET.getlist('genre')
+        type_ids = request.GET.getlist('type')
+        years_selected = request.GET.getlist('year')
 
         films = Movie.objects.all()
 
         if query:
             films = films.filter(title__icontains=query)
-        if genre_id:
-            films = films.filter(genres=genre_id)
-        if type_id:
-            films = films.filter(types=type_id)
-        if year:
-            films = films.filter(year=year)
+        if genre_ids:
+            films = films.filter(genres__in=genre_ids).distinct()
+        if type_ids:
+            films = films.filter(types__in=type_ids).distinct()
+        if years_selected:
+            films = films.filter(year__in=years_selected)
 
         return render(request, 'VATAONLINE/films.html',
                       {'films': films, 'genres': genres, 'types': types, 'years': years})
@@ -70,4 +70,4 @@ class AddComments(View):
             comment = form.save(commit=False)
             comment.movie = get_object_or_404(Movie, pk=pk)
             comment.save()
-        return redirect(f'/{pk}')
+        return redirect('movie', pk=pk)

@@ -339,16 +339,28 @@ footer {
     margin-bottom: 10px;
 }
 
-
-/* Добавленные стили для контейнера фильмов */
 .container {
-    margin: 0 auto;
-    max-width: 700px;
+    margin-left: 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr)); /* Автоматически подстраиваем колонки */
-    grid-gap: 20px; /* Расстояние между карточками */
+    grid-template-columns: repeat(auto-fit, 225px);
+    grid-auto-flow: row; /* Располагаем элементы в строку */
+}
+.container3 {
+    margin: 0 auto;
+    max-width: 1300px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    justify-content: space-around; /* Выравнивание элементов по горизонтали */
     padding: 20px;
 }
+
+.container2{
+    margin-left: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 225px);
+    grid-auto-flow: row; /* Располагаем элементы в строку */
+}
+
 
 .main {
     padding-top: 80px; /* Задаем отступ сверху, равный высоте header */
